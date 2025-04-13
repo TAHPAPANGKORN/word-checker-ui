@@ -19,9 +19,16 @@ export default function WordChecker() {
   };
 
   const checkIsVerb = (words: string[]) => {
-    const isVerb = words.every((w) => verbs.includes(w));
-    setMyVerb(isVerb);
+    const isVerb = words.some((w) => verbs.includes(w));
+    console.log(isVerb)
+    if (words[0].includes("การ")){
+      setMyVerb(!isVerb)
+    }
+    else {
+      setMyVerb(isVerb);
+    }
   };
+
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -34,9 +41,9 @@ export default function WordChecker() {
 
       if (typedWords.length === 0) return;
       const newWords = [...myWords, ...typedWords];
+      checkIsVerb(newWords);
       setMyWords(newWords);
       checkDuplicate(newWords);
-      checkIsVerb(newWords);
       setInput("");
     }
   };
@@ -52,6 +59,7 @@ export default function WordChecker() {
     const isDuplicate = myWords.filter((w) => w === word).length > 1;
     return isDuplicate ? "border border-red-300" : "border-0";
   };
+
 
   return (
     <div className="flex justify-center content-center bg-[#FEFEFE] min-h-screen p-4">
@@ -91,12 +99,7 @@ export default function WordChecker() {
 
         <div className="mt-2 space-y-1">
           {myWords.map((word, index) => (
-            <div
-              key={index}
-              className={`flex place-content-between ${borderSameWord(
-                word
-              )} bg-[#F9FAFB] h-15 p-3 rounded-sm `}
-            >
+            <div key={index} className={`flex place-content-between ${borderSameWord(word)} bg-[#F9FAFB] h-15 p-3 rounded-sm `}>
               <p className="p-2" key={index}>
                 {word}
               </p>
