@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Word Duplicate Checker (Next.js + TypeScript)
 
-## Getting Started
+A simple app for detecting duplicate words typed by the user. It splits words by space and highlights any duplicates with a red border.
 
-First, run the development server:
+## 🚀 Features
+
+- Type and press `Enter` to add words
+- Automatically splits multiple words by space
+- Checks for duplicates
+- Highlights duplicate words with red border
+- Remove individual words
+- Clear all words with a reset button
+
+## 🛠️ Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+## 📦 Installation
 
 ```bash
+git clone https://github.com/yourusername/word-checker.git
+cd word-checker
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##  How It Works
+1. Type words in the input field.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Words will appear below, separated if there are spaces.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Duplicate words are automatically detected.
 
-## Learn More
+4. Duplicates are highlighted with a red border.
 
-To learn more about Next.js, take a look at the following resources:
+5. Each word has a delete button.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. A reset button clears the entire list.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📸 Screenshot
+![alt text](image-1.png)
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👨‍💻 Developer
+- Developed by Papangkorn Pitjawong 🙋‍♂️
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
