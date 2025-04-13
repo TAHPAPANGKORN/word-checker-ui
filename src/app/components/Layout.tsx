@@ -141,7 +141,7 @@ export default function WordChecker() {
                     <div className="flex gap-2">
                     <button
                       onClick={saveEditedWord}
-                      className="p-2 bg-green-200 hover:bg-green-300 rounded-sm"
+                      className="p-2 bg-green-200 hover:bg-green-300 rounded-sm cursor-pointer"
                     >
                       <IoSaveSharp />
                     </button>
@@ -151,7 +151,7 @@ export default function WordChecker() {
                         setEditingIndex(null);
                         setEditingText("");
                       }}
-                      className="p-2 bg-red-200 hover:bg-red-300 rounded-sm"
+                      className="p-2 bg-red-200 hover:bg-red-300 rounded-sm cursor-pointer"
                     >
                       <MdCancel />
                     </button>
@@ -159,7 +159,7 @@ export default function WordChecker() {
                   ) : (
                     <button
                       onClick={() => editWord(index)}
-                      className="p-2 hover:bg-gray-200 rounded-sm"
+                      className="p-2 hover:bg-gray-200 rounded-sm cursor-pointer"
                     >
                       <FaEdit />
                     </button>
@@ -167,7 +167,7 @@ export default function WordChecker() {
 
                   <button
                     onClick={() => deleteWord(index)}
-                    className="p-2 hover:bg-gray-200 rounded-sm"
+                    className="p-2 hover:bg-gray-200 rounded-sm cursor-pointer"
                   >
                     <IoTrashBin />
                   </button>
