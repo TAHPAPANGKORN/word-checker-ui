@@ -1,7 +1,7 @@
 'use client';
-
 import { useState } from 'react';
 import { IoTrashBin } from "react-icons/io5"
+
 export default function WordChecker() {
   const [input, setInput] = useState('');
   const [result, setResult] = useState(false);
@@ -33,12 +33,17 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     }
   };
 
-  const deleteWord = (myWord:string, index:number) => {
+  const deleteWord = (index:number) => {
     const updatedWords = myWords.filter((w, i) => i !== index);
+    console.log(updatedWords);
     setMyWords(updatedWords);
     checkDuplicate(updatedWords);
-  } 
+  };
 
+  const borderSameWord = (word:string) => {
+    const isDuplicate = myWords.filter((w) => w === word).length > 1;
+    return isDuplicate ? "border border-red-300" : "border-0";
+  };
 
   return (
     <div className='flex justify-center content-center bg-[#FEFEFE] min-h-screen p-4'>
@@ -46,7 +51,7 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         <h1 className='text-center'>Connected Word For Director</h1>
         {result && (
           <p className="text-center font-bold text-white p-3 bg-red-500 rounded-sm my-2">
-            SAME WORD!!
+            SAME WORD DETECT!!
           </p>
         )}
         <div className="flex gap-4">
@@ -72,9 +77,9 @@ const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 
         <div className="mt-2 space-y-1">
           {myWords.map((word, index) => (
-            <div key={index} className='flex place-content-between  bg-[#F9FAFB] h-15 p-3 '>
+            <div key={index} className={`flex place-content-between ${borderSameWord(word)} bg-[#F9FAFB] h-15 p-3 rounded-sm `}>
                 <p className='p-2' key={index}>{word}</p>
-                <button onClick={() => deleteWord(word, index)} className='p-2 rounded-sm cursor-pointer hover:bg-gray-200'><IoTrashBin /></button>
+                <button onClick={() => deleteWord(index)} className='p-2 rounded-sm cursor-pointer hover:bg-gray-200'><IoTrashBin /></button>
             </div>
           ))}
         </div>
