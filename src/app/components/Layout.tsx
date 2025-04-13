@@ -79,12 +79,12 @@ export default function WordChecker() {
 
         {result && (
           <p className="text-center font-bold text-white p-3 bg-red-500 rounded-sm my-2">
-            SAME WORD DETECT!!
+            SAME WORD DETECTED!!
           </p>
         )}
         {myVerb && (
           <p className="text-center font-bold text-white p-3 bg-red-500 rounded-sm my-2">
-            IS A VERB!!
+            VERB DETECTED!!
           </p>
         )}
 
