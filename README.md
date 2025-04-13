@@ -21,8 +21,8 @@ A simple app for detecting duplicate words typed by the user. It splits words by
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/yourusername/word-checker.git
-cd word-checker
+git clone https://github.com/TAHPAPANGKORN/word-checker-ui.git
+cd word-checker-ui
 npm install
 npm run dev
 ```
