@@ -22,18 +22,25 @@ export default function WordChecker() {
     setResult(wordSet.size !== words.length);
   };
 
+const checkIsVerb = (words: string[]) => {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const isVerb = verbs.includes(word);
+    const prevWord = words[i - 1];
 
-  const checkIsVerb = (words: string[]) => {
-    const isVerb = words.some((w) => verbs.includes(w));
-    const indexKan =words.indexOf('การ'); 
-    const indexWords = words.length-1;
-    if (indexWords-indexKan === 1){
-      setMyVerb(!isVerb)
+    if (i > 0 && prevWord === "การ") {
+      setMyVerb(!isVerb);
+      break;
+    } else if (isVerb) {
+      setMyVerb(true);
+      break;
+    } else {
+      setMyVerb(false);
+      break;
     }
-    else{
-      setMyVerb(isVerb)
-    }
-  };
+  }
+};
+
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -79,6 +86,14 @@ export default function WordChecker() {
     return isDuplicate ? "border border-red-300" : "";
   };
 
+  const borderIsVerb = (word: string) => {
+    const isVerb = verbs.includes(word);
+    const index = myWords.indexOf(word);
+    const prevWord = myWords[index - 1];
+    if (index > 0 && prevWord === "การ") return "";
+    return isVerb ? "border border-yellow-300" : "";
+  }
+
   return (
     <div className="flex justify-center bg-[#FBFBFB] min-h-screen p-4">
       <div className="w-150 p-4 border border-gray-200 rounded-lg bg-white">
@@ -92,7 +107,7 @@ export default function WordChecker() {
           </p>
         )}
         {myVerb && (
-          <p className="text-center font-bold text-white p-3 bg-red-500 rounded-sm my-2">
+          <p className="text-center font-bold text-white p-3 bg-yellow-500 rounded-sm my-2">
             VERB DETECTED!!
           </p>
         )}
@@ -137,7 +152,7 @@ export default function WordChecker() {
                 key={index}
                 className={`flex items-center justify-between ${borderSameWord(
                   word
-                )} bg-[#F9FAFB] p-3 rounded-sm`}
+                )} ${borderIsVerb(word)} bg-[#F9FAFB] p-3 rounded-sm`}
               >
                 {isEditing ? (
                   <input
