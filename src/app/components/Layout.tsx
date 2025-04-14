@@ -22,24 +22,30 @@ export default function WordChecker() {
     setResult(wordSet.size !== words.length);
   };
 
-const checkIsVerb = (words: string[]) => {
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
-    const isVerb = verbs.includes(word);
-    const prevWord = words[i - 1];
-
-    if (i > 0 && prevWord === "การ") {
-      setMyVerb(!isVerb);
-      break;
-    } else if (isVerb) {
-      setMyVerb(true);
-      break;
-    } else {
-      setMyVerb(false);
-      break;
+ const checkIsVerb = (words: string[]) => {
+    // ตั้งค่าเริ่มต้นว่าไม่ใช่คำกริยา
+    let isVerb = false;
+    
+    // ค้นหาคำที่เป็นคำกริยาในรายการคำ
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i];
+      
+      // ตรวจสอบว่าเป็นคำกริยาในรายการของเรา
+      if (verbs.includes(word)) {
+        // ตรวจสอบว่ามีคำว่า "การ" นำหน้าหรือไม่
+        if (i > 0 && words[i-1] === 'การ') {
+          // ถ้ามีคำว่า "การ" นำหน้า ไม่นับเป็นคำกริยา
+          continue;
+        } else {
+          // ถ้าเป็นคำกริยาและไม่มีคำว่า "การ" นำหน้า
+          isVerb = true;
+          break;
+        }
+      }
     }
-  }
-};
+    // อัปเดตสถานะ
+    setMyVerb(isVerb);
+  };
 
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -62,6 +68,8 @@ const checkIsVerb = (words: string[]) => {
   const deleteWord = (index: number) => {
     const updatedWords = myWords.filter((_, i) => i !== index);
     setMyWords(updatedWords);
+    setMyVerb(false)
+    checkIsVerb(updatedWords);
     checkDuplicate(updatedWords);
   };
 
@@ -90,7 +98,9 @@ const checkIsVerb = (words: string[]) => {
     const isVerb = verbs.includes(word);
     const index = myWords.indexOf(word);
     const prevWord = myWords[index - 1];
-    if (index > 0 && prevWord === "การ") return "";
+    if (index > 0 && prevWord === "การ") {
+      return "";
+    }
     return isVerb ? "border border-yellow-300" : "";
   }
 
@@ -129,6 +139,7 @@ const checkIsVerb = (words: string[]) => {
               setInput("");
               setEditingIndex(null);
               setEditingText("");
+
             }}
             className=" rounded-sm text-sm p-4 bg-black hover:bg-gray-800 text-white font-bold cursor-pointer"
           >
