@@ -25,7 +25,14 @@ export default function WordChecker() {
 
   const checkIsVerb = (words: string[]) => {
     const isVerb = words.some((w) => verbs.includes(w));
-    setMyVerb(isVerb)
+    const indexKan =words.indexOf('การ'); 
+    const indexWords = words.length-1;
+    if (indexWords-indexKan === 1){
+      setMyVerb(!isVerb)
+    }
+    else{
+      setMyVerb(isVerb)
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
