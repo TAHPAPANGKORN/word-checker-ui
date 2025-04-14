@@ -107,6 +107,7 @@ export default function WordChecker() {
   return (
     <div className="bg-[#FBFBFB] ">
       <div className="min-h-screen flex flex-col items-center gap-4">
+
         <div className="w-90 md:w-150 p-4 sticky top-4  border border-gray-200  bg-white  rounded-lg shadow z-50">
           <h1 className="text-center md:text-2xl p-4 font-bold">
             Connected Word For Director
@@ -132,6 +133,7 @@ export default function WordChecker() {
               className="border border-gray-200 p-2 rounded-sm w-full focus-visible:outline-1 focus-visible:outline-gray-800"
               placeholder="e.g. การ วิ่ง เครื่อง บิน"
             />
+
             <button
               onClick={() => {
                 setMyWords([]);
@@ -144,18 +146,32 @@ export default function WordChecker() {
               className=" rounded-sm text-sm p-4 bg-black hover:bg-gray-800 text-white font-bold cursor-pointer "
             >
               <div className="flex flex-row gap-2 items-center ">
-                <RiResetLeftFill className="text-lg text-center" />
+                {/* reset icon */}
+                <RiResetLeftFill className="text-lg text-center" />  
                 <p>Reset</p>
               </div>
             </button>
+
           </div>
         </div>
 
         <div className="mt-4 space-y-2 h-auto w-90 md:w-150 bg-white p-4 border rounded-lg border-gray-200">
-          <div className="flex flex-row gap-2">
-            <HiDocumentText className="text-2xl" />
-            <h1 className="font-bold text-lg items-center">Your Words List</h1>
+
+          <div className="flex flex-row justify-between  gap-2">
+            <div className="flex ">
+              <HiDocumentText className="text-2xl" />
+              <h1 className="font-bold text-lg items-center">
+                Your Words List
+              </h1>
+            </div>
+
+            {myWords.length > 1 ? (
+              <h1>{myWords.length} Words</h1>
+            ) : (
+              <h1>{myWords.length} Word</h1>
+            )}
           </div>
+
           {myWords.map((word, index) => {
             const isEditing = index === editingIndex;
             return (
@@ -221,7 +237,9 @@ export default function WordChecker() {
             );
           })}
         </div>
+
       </div>
     </div>
   );
 }
+
