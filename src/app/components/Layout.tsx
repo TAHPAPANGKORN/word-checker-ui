@@ -105,56 +105,56 @@ export default function WordChecker() {
   }
 
   return (
-    <div className="flex justify-center bg-[#FBFBFB] min-h-screen p-4">
-      <div className="w-150 p-4 border border-gray-200 rounded-lg bg-white">
-        <h1 className="text-center md:text-2xl p-4 font-bold">
-          Connected Word For Director
-        </h1>
+    <div className="bg-[#FBFBFB] ">
+      <div className="min-h-screen flex flex-col items-center">
+        <div className="w-90 md:w-150 p-4 sticky top-4  border border-gray-200  bg-white  rounded-lg shadow z-50">
+          <h1 className="text-center md:text-2xl p-4 font-bold">
+            Connected Word For Director
+          </h1>
 
-        {result && (
-          <p className="text-center font-bold text-white p-3 bg-red-500 rounded-sm my-2">
-            SAME WORD DETECTED!!
-          </p>
-        )}
-        {myVerb && (
-          <p className="text-center font-bold text-white p-3 bg-yellow-500 rounded-sm my-2">
-            VERB DETECTED!!
-          </p>
-        )}
+          {result && (
+            <p className="text-center font-bold text-white p-3 bg-red-500 rounded-sm my-2">
+              SAME WORD DETECTED!!
+            </p>
+          )}
+          {myVerb && (
+            <p className="text-center font-bold text-white p-3 bg-yellow-500 rounded-sm my-2">
+              VERB DETECTED!!
+            </p>
+          )}
 
-        <div className="flex gap-4">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="border border-gray-200 p-2 rounded-sm w-full focus-visible:outline-1 focus-visible:outline-gray-800"
-            placeholder="e.g. การ วิ่ง เครื่อง บิน"
-          />
-          <button
-            onClick={() => {
-              setMyWords([]);
-              setResult(false);
-              setMyVerb(false);
-              setInput("");
-              setEditingIndex(null);
-              setEditingText("");
-
-            }}
-            className=" rounded-sm text-sm p-4 bg-black hover:bg-gray-800 text-white font-bold cursor-pointer"
-          >
-            <div className="flex flex-row gap-2 items-center ">
-              <RiResetLeftFill className="text-lg text-center"/>
-              <p>Reset</p>
-            </div>
-          </button>
+          <div className="flex gap-4">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="border border-gray-200 p-2 rounded-sm w-full focus-visible:outline-1 focus-visible:outline-gray-800"
+              placeholder="e.g. การ วิ่ง เครื่อง บิน"
+            />
+            <button
+              onClick={() => {
+                setMyWords([]);
+                setResult(false);
+                setMyVerb(false);
+                setInput("");
+                setEditingIndex(null);
+                setEditingText("");
+              }}
+              className=" rounded-sm text-sm p-4 bg-black hover:bg-gray-800 text-white font-bold cursor-pointer "
+            >
+              <div className="flex flex-row gap-2 items-center ">
+                <RiResetLeftFill className="text-lg text-center" />
+                <p>Reset</p>
+              </div>
+            </button>
+          </div>
         </div>
 
-        <div className="mt-4 space-y-2">
+        <div className="mt-4 space-y-2 h-auto w-90 md:w-150 bg-white p-4 border rounded-lg border-gray-200">
           <div className="flex flex-row gap-2">
-            <HiDocumentText className= "text-2xl" />
+            <HiDocumentText className="text-2xl" />
             <h1 className="font-bold text-lg items-center">Your Words List</h1>
-            
           </div>
           {myWords.map((word, index) => {
             const isEditing = index === editingIndex;
@@ -176,7 +176,9 @@ export default function WordChecker() {
                     className="border border-gray-200 p-2 rounded-sm w-full mr-4"
                   />
                 ) : (
-                  <p>{word}</p>
+                  <p>
+                    {index + 1}. {word}
+                  </p>
                 )}
 
                 <div className="flex gap-2">
