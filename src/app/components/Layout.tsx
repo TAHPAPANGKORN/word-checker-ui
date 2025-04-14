@@ -106,7 +106,7 @@ export default function WordChecker() {
 
   return (
     <div className="bg-[#FBFBFB] ">
-      <div className="min-h-screen flex flex-col items-center">
+      <div className="min-h-screen flex flex-col items-center gap-4">
         <div className="w-90 md:w-150 p-4 sticky top-4  border border-gray-200  bg-white  rounded-lg shadow z-50">
           <h1 className="text-center md:text-2xl p-4 font-bold">
             Connected Word For Director
