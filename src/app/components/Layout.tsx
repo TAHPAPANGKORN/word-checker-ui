@@ -4,6 +4,9 @@ import { IoTrashBin } from "react-icons/io5";
 import { FaEdit } from "react-icons/fa";
 import { IoSaveSharp } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
+import { HiDocumentText } from "react-icons/hi";
+import { RiResetLeftFill } from "react-icons/ri";
+
 import verbs from "../data/verbs.json";
 
 export default function WordChecker() {
@@ -19,13 +22,10 @@ export default function WordChecker() {
     setResult(wordSet.size !== words.length);
   };
 
+
   const checkIsVerb = (words: string[]) => {
     const isVerb = words.some((w) => verbs.includes(w));
-    if (words[0]?.includes("การ")) {
-      setMyVerb(!isVerb);
-    } else {
-      setMyVerb(isVerb);
-    }
+    setMyVerb(isVerb)
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -73,9 +73,11 @@ export default function WordChecker() {
   };
 
   return (
-    <div className="flex justify-center bg-[#FEFEFE] min-h-screen p-4">
-      <div className="w-150 p-4 border border-gray-200 rounded-sm bg-white">
-        <h1 className="text-center md:text-2xl p-4">Connected Word For Director</h1>
+    <div className="flex justify-center bg-[#FBFBFB] min-h-screen p-4">
+      <div className="w-150 p-4 border border-gray-200 rounded-lg bg-white">
+        <h1 className="text-center md:text-2xl p-4 font-bold">
+          Connected Word For Director
+        </h1>
 
         {result && (
           <p className="text-center font-bold text-white p-3 bg-red-500 rounded-sm my-2">
@@ -95,7 +97,7 @@ export default function WordChecker() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             className="border border-gray-200 p-2 rounded-sm w-full focus-visible:outline-1 focus-visible:outline-gray-800"
-            placeholder="Type A Word And Enter e.g. การ วิ่ง"
+            placeholder="e.g. การ วิ่ง เครื่อง บิน"
           />
           <button
             onClick={() => {
@@ -106,13 +108,21 @@ export default function WordChecker() {
               setEditingIndex(null);
               setEditingText("");
             }}
-            className="rounded-sm text-sm p-4 bg-black hover:bg-gray-800 text-white font-bold cursor-pointer"
+            className=" rounded-sm text-sm p-4 bg-black hover:bg-gray-800 text-white font-bold cursor-pointer"
           >
-            Reset
+            <div className="flex flex-row gap-2 items-center ">
+              <RiResetLeftFill className="text-lg text-center"/>
+              <p>Reset</p>
+            </div>
           </button>
         </div>
 
         <div className="mt-4 space-y-2">
+          <div className="flex flex-row gap-2">
+            <HiDocumentText className= "text-2xl" />
+            <h1 className="font-bold text-lg items-center">Your Words List</h1>
+            
+          </div>
           {myWords.map((word, index) => {
             const isEditing = index === editingIndex;
             return (
@@ -139,22 +149,22 @@ export default function WordChecker() {
                 <div className="flex gap-2">
                   {isEditing ? (
                     <div className="flex gap-2">
-                    <button
-                      onClick={saveEditedWord}
-                      className="p-2 bg-green-200 hover:bg-green-300 rounded-sm cursor-pointer"
-                    >
-                      <IoSaveSharp />
-                    </button>
+                      <button
+                        onClick={saveEditedWord}
+                        className="p-2 bg-green-200 hover:bg-green-300 rounded-sm cursor-pointer"
+                      >
+                        <IoSaveSharp />
+                      </button>
 
-                    <button
-                      onClick={() => {
-                        setEditingIndex(null);
-                        setEditingText("");
-                      }}
-                      className="p-2 bg-red-200 hover:bg-red-300 rounded-sm cursor-pointer"
-                    >
-                      <MdCancel />
-                    </button>
+                      <button
+                        onClick={() => {
+                          setEditingIndex(null);
+                          setEditingText("");
+                        }}
+                        className="p-2 bg-red-200 hover:bg-red-300 rounded-sm cursor-pointer"
+                      >
+                        <MdCancel />
+                      </button>
                     </div>
                   ) : (
                     <button
@@ -171,12 +181,10 @@ export default function WordChecker() {
                   >
                     <IoTrashBin />
                   </button>
-
                 </div>
               </div>
             );
           })}
-
         </div>
       </div>
     </div>
