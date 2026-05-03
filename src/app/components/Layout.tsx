@@ -51,10 +51,17 @@ export default function WordChecker() {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      const typedWords = input
-        .toLowerCase()
-        .split(" ")
+      
+      // ใช้ Intl.Segmenter เพื่อแยกคำภาษาไทยแม้ไม่มีช่องว่าง
+      // Use Intl.Segmenter for Thai word segmentation even without spaces
+      const segmenter = new Intl.Segmenter("th", { granularity: "word" });
+      const segments = segmenter.segment(input.toLowerCase());
+      
+      const typedWords = Array.from(segments)
+        .filter((s) => s.isWordLike)
+        .map((s) => s.segment.trim())
         .filter((word) => word !== "");
+
       if (typedWords.length === 0) return;
 
       const newWords = [...myWords, ...typedWords];
